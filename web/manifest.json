@@ -1,6 +1,6 @@
 {
-    "name": "workflow_automation",
-    "short_name": "workflow_automation",
+    "name": "Denner Automation",
+    "short_name": "Denner Automation",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
