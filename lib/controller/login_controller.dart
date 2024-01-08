@@ -1,4 +1,3 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workflow_automation/ui/pages/home_page.dart';
@@ -16,8 +15,10 @@ class LoginController extends GetxController {
   }
 
   void login() async {
-    if (dotenv.env['ADMIN_USERNAME'] == username.value &&
-        dotenv.env['ADMIN_PASSWORD'] == password.value) {
+    if (const String.fromEnvironment('ADMIN_USERNAME', defaultValue: 'NULL') ==
+            username.value &&
+        const String.fromEnvironment('ADMIN_PASSWORD', defaultValue: 'NULL') ==
+            password.value) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool('isLoggedIn', true);
       isLoggedIn.value = true;
