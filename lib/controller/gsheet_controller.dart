@@ -65,13 +65,13 @@ class GSheetController extends GetxController {
           const String.fromEnvironment('CLIENT_ID', defaultValue: 'NULL');
       String client_email =
           const String.fromEnvironment('CLIENT_EMAIL', defaultValue: 'NULL');
-      String private_key =
-          const String.fromEnvironment('PRIVATE_KEY', defaultValue: 'NULL');
+
       var _credentials = {
         "type": "service_account",
         "project_id": "dennermvp",
         "private_key_id": private_key_id,
-        "private_key": private_key,
+        "private_key":
+            "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDC76gK3BgfpraV\nRpKyssuCrwg6G+MNdbC4AA6fmD0t59OC6P9S2hMTeqEiuu/b+PGCIyOJtMSSyVHQ\nViPINeq5R7QvuK6BuwAM7s/i2iTIn/9i8amL2eZBZQO1CiP2F9FHlYMRczyJJYeV\n39UOhOEcvt1rPUgDQDPltQNcKLQE3T75aTaO+j6ih4X82Uq7BHavBW3DGbVi11Gi\niE7Mu8UW3qF+s8R+3ZWotdMMX9g8Ok5SgttP1Iuh5edVkWGPoyZ8XFJ5KXUUUOyA\npVF29FE+e5dzm32lEpjpA9l6WRjxXLu5BTid7iNP7JGIBPAUEEVcj7CndLWo5MQV\nqB6O+QcbAgMBAAECggEAAho2UXtNSpONco+c7Zp1r/rb1Kybxr16HOZG5QHt9kKC\n0HlEG1IxgwVzpok9aqZiOvfl3lA/mzg3t2X0+tZwkqJxEVPITsJsu0Kc1EWaNN3n\nEdupMRgezPsG69hLVbjyw9/hBS7jE53Eo8QqJUTChYEeM9udEU4W9ZAVCL2CL+OW\ngh/THQvW7CEJ9U/4GPhEoInjKj2/6MIYPJXoEunhkHJrgAGj6VrgHwWEdOIIDtnJ\nMwpiUqVcJrRxpU3w6yVph6iW8YCGnUwqqd9ZzPN6ZaeaYVCEoY8Av3mmOhh48JJJ\nc7OYHTs0NAjo/FmCfTfoMICCdYkzBkOVV55bfnArkQKBgQDuEgHDWS9JwBwrVXFk\nmJDd1PHCvapZ+LH8CMWgxbIk0HzKw6xAz7q6ZldJ4QlIYVNQqxmdlIve4PQzbVF3\n/Li7fbCyarywuVQYJA9mPw2F2kp3SWO/9GjsBXGiPZWyZMduiXM/LbuTLnh5YHb+\n/ivCA9SGdvdar5qqFDRf6FGb6QKBgQDRngXnH6aNPqBVW3jF9HxvgDudrCuju93r\nbmC/1vtcVBXMgDSer2ktvk1XAnb7iHI3iPDUp1jIhRENlxJtNqs37w2Xucy0SR9I\nxiQt0TP6jykL0ESJNgwLzmM03Dv2hNRQQIsX/bJ86gfkVWfWvo+dHHyWIy33Gx1m\nH5bm5RJcYwKBgQCRx78CoyMc0yGsu2ZzRiU3YYUlTcT50RsUDT8PQt/iQTSZaRaa\nnVlnePGskLuBce91r0BBSUwZD8EZmLBRfBSW4tGHf2rKAMJpAfPYFXYvZ8s/nlYR\nnhV9qZu60GFRWvrwSgSjRFrfNo6ZLKPRY0ziQjwqlsDC7FMWIMctj3IhuQKBgQCS\nyWrux341KKbUPyLa1HMTDaQxrLA+jz8/L2M208/ffs5pD1pJySIJM1srVAGH8Kuy\n8gVblPiaKnyfnKv9qKvLlm5ZUnXjxdTPfFk3cGlKy1d9+1ETGLLkzZkxGgwvfCLF\nM/1zRmfoC2aNYbU+buFYrusbo/T7NpSmv/ZHKCBsawKBgQDgkPQ5uPC6bys8HtA2\nfUA08Yxw1n+Gq/YLpVNucvc6ohtGAhjBu2dY0tVyYO8979Ncd93M4PVYh0YBbWbP\nRf6GMxrQ9QcU4RRkvaAB6gkmS8uYRSF9fChOdmqS9QMAKum2chCBMjFigptuAjaf\nTjZT82PnA3iicm8iF0ImJqQyZw==\n-----END PRIVATE KEY-----\n",
         "client_email": client_email,
         "client_id": client_id,
         "auth_uri": "https://accounts.google.com/o/oauth2/auth",
