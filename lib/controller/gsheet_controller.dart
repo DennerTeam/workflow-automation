@@ -232,7 +232,7 @@ class GSheetController extends GetxController {
         singleRent: double.tryParse(data[15]) ?? 0.0,
         doubleRent: double.tryParse(data[16]) ?? 0.0,
         threePlusRent: double.tryParse(data[17]) ?? 0.0,
-        threePlusRooms: int.tryParse(data[17]) ?? 0, //change
+        threePlusRooms: 0, //change
         rules: {"rules": data[34].toString().split(",").toList()},
         isUploadedToDB:
             data.length == 48 ? false : bool.tryParse(data[48]) ?? false);

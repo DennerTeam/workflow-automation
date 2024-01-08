@@ -82,155 +82,161 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          const SizedBox(
-            height: 30,
-          ),
-          const Text(
-            'Denner Workflow Automation',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 20), // Provides some spacing
-          Container(
-            width: MediaQuery.of(context).size.width * 0.7,
-            child: TextButton(
-              onPressed: () async {
-                if (!controller.isLoading.value) {
-                  controller.fetchDataFromSheet();
-                }
-              },
-              child: const Text('Fetch PG/Hostel from Sheets 📄'),
-              style: TextButton.styleFrom(
-                primary: Colors.white,
-                backgroundColor: Colors.blue,
-                onSurface: Colors.grey,
-              ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const SizedBox(
+              height: 30,
             ),
-          ),
-          const SizedBox(height: 20), // Provides some spacing
-          Obx(() {
-            if (!controller.isLoading.value) {
-              if (controller.rowData.value.isNotEmpty) {
-                return SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: DataTable(
-                      columnSpacing: 38, // Adjust spacing between columns
-                      headingRowColor: MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                        // Change color of the heading row
-                        if (states.contains(MaterialState.hovered)) {
-                          return Colors.blueAccent.withOpacity(0.08);
-                        }
-                        return Colors
-                            .lightBlue; // Use whatever color suits your need
-                      }),
-                      headingTextStyle: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                      dataRowColor: MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                        // Change color of the data rows
-                        if (states.contains(MaterialState.selected)) {
-                          return Colors.grey.withOpacity(0.5);
-                        }
-                        return Colors
-                            .white; // Use any color that fits your theme
-                      }),
-                      border: TableBorder.all(
-                        color: Colors.black, // Add border color
-                        width: 1, // Border width
-                      ),
-                      columns: getColumnNames(controller.columnNames),
-                      rows: getRows(controller.rowData.value),
-                    ),
-                  ),
-                );
-              } else
-                return Container(
-                  child: Center(
-                      child: Text(
-                    "No PG Hostel Data!",
-                    style: TextStyle(fontSize: 18),
-                  )),
-                );
-            }
-            return const Center(
-                child: CircularProgressIndicator(
-              color: Colors.blue,
-            ));
-          }),
-          const SizedBox(height: 20), // Provides some spacing
-          Container(
-            width: MediaQuery.of(context).size.width * 0.7,
-            child: TextButton(
-              onPressed: () async {
-                if (controller.rowData.value.isEmpty) {
-                  Get.snackbar("Error", "No PG Hostel data to upload!");
-                  return;
-                }
-                _timer =
-                    Timer.periodic(const Duration(seconds: 3), (Timer timer) {
-                  if (_pageController.hasClients) {
-                    int nextPage = _pageController.page!.round() + 1;
-                    if (nextPage == messages.length) {
-                      nextPage = 0;
-                    }
-                    _pageController.animateToPage(
-                      nextPage,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeIn,
-                    );
+            const Text(
+              'Denner Workflow Automation',
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20), // Provides some spacing
+            Container(
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: TextButton(
+                onPressed: () async {
+                  if (!controller.isLoading.value) {
+                    controller.fetchDataFromSheet();
                   }
-                });
-                await controller.sendToSupabase();
-                _timer?.cancel();
-              },
-              child: const Text('Send to Supabase 🚀'),
-              style: TextButton.styleFrom(
-                primary: Colors.white,
-                backgroundColor: Colors.blue,
-                onSurface: Colors.grey,
+                },
+                child: const Text('Fetch PG/Hostel from Sheets 📄'),
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                  backgroundColor: Colors.blue,
+                  onSurface: Colors.grey,
+                ),
               ),
             ),
-          ),
-          Obx(
-            () => (controller.isDataUploading.value)
-                ? Expanded(
-                    child: PageView.builder(
-                      scrollDirection: Axis.horizontal,
-                      controller: _pageController,
-                      itemCount: messages.length,
-                      itemBuilder: (context, index) {
-                        return Center(
-                          child: Text(
-                            messages[index],
-                            style: const TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                          ),
-                        );
-                      },
+            const SizedBox(height: 20), // Provides some spacing
+            Obx(() {
+              if (!controller.isLoading.value) {
+                if (controller.rowData.value.isNotEmpty) {
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: DataTable(
+                        columnSpacing: 38, // Adjust spacing between columns
+                        headingRowColor:
+                            MaterialStateProperty.resolveWith<Color>(
+                                (Set<MaterialState> states) {
+                          // Change color of the heading row
+                          if (states.contains(MaterialState.hovered)) {
+                            return Colors.blueAccent.withOpacity(0.08);
+                          }
+                          return Colors
+                              .lightBlue; // Use whatever color suits your need
+                        }),
+                        headingTextStyle: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                        dataRowColor: MaterialStateProperty.resolveWith<Color>(
+                            (Set<MaterialState> states) {
+                          // Change color of the data rows
+                          if (states.contains(MaterialState.selected)) {
+                            return Colors.grey.withOpacity(0.5);
+                          }
+                          return Colors
+                              .white; // Use any color that fits your theme
+                        }),
+                        border: TableBorder.all(
+                          color: Colors.black, // Add border color
+                          width: 1, // Border width
+                        ),
+                        columns: getColumnNames(controller.columnNames),
+                        rows: getRows(controller.rowData.value),
+                      ),
                     ),
-                  )
-                : Container(),
-          ),
-          Obx(() => (!controller.isDataUploading.value &&
-                  controller.error.value.isNotEmpty)
-              ? Center(
-                  child: Text(
-                  controller.error.value,
-                  textAlign: TextAlign.center,
-                ))
-              : Container())
-        ],
+                  );
+                } else
+                  return Container(
+                    child: Center(
+                        child: Text(
+                      "No PG Hostel Data!",
+                      style: TextStyle(fontSize: 18),
+                    )),
+                  );
+              }
+              return const Center(
+                  child: CircularProgressIndicator(
+                color: Colors.blue,
+              ));
+            }),
+            const SizedBox(height: 20), // Provides some spacing
+            Container(
+              width: MediaQuery.of(context).size.width * 0.7,
+              child: TextButton(
+                onPressed: () async {
+                  if (controller.rowData.value.isEmpty) {
+                    Get.snackbar("Error", "No PG Hostel data to upload!");
+                    return;
+                  }
+                  _timer =
+                      Timer.periodic(const Duration(seconds: 3), (Timer timer) {
+                    if (_pageController.hasClients) {
+                      int nextPage = _pageController.page!.round() + 1;
+                      if (nextPage == messages.length) {
+                        nextPage = 0;
+                      }
+                      _pageController.animateToPage(
+                        nextPage,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeIn,
+                      );
+                    }
+                  });
+                  await controller.sendToSupabase();
+                  _timer?.cancel();
+                },
+                child: const Text('Send to Supabase 🚀'),
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                  backgroundColor: Colors.blue,
+                  onSurface: Colors.grey,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Obx(
+              () => (controller.isDataUploading.value)
+                  ? Expanded(
+                      child: PageView.builder(
+                        scrollDirection: Axis.horizontal,
+                        controller: _pageController,
+                        itemCount: messages.length,
+                        itemBuilder: (context, index) {
+                          return Center(
+                            child: Text(
+                              messages[index],
+                              style: const TextStyle(
+                                  fontSize: 24, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
+                            ),
+                          );
+                        },
+                      ),
+                    )
+                  : Container(),
+            ),
+            Obx(() => (!controller.isDataUploading.value &&
+                    controller.error.value.isNotEmpty)
+                ? Center(
+                    child: Text(
+                    controller.error.value,
+                    textAlign: TextAlign.center,
+                  ))
+                : Container())
+          ],
+        ),
       ),
     );
   }
